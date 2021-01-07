@@ -14,7 +14,7 @@ public interface UserService {
 
     UserDTO findUserById(Long id);
 
-    void updateUser(UserDTO userBeforeUpdate);
+    UserEntity updateUser(UserDTO userDTO, Long id) throws NoSuchFieldException;
 
     UserEntity DTOToEntityMapper(UserDTO userDTO);
 }

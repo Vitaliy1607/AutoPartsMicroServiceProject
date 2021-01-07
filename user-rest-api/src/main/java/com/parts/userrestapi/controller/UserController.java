@@ -2,6 +2,7 @@ package com.parts.userrestapi.controller;
 
 
 import com.parts.userrestapi.domain.UserDTO;
+import com.parts.userrestapi.repository.UserRepository;
 import com.parts.userrestapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping
     public ResponseEntity<?> createUser(@RequestBody UserDTO user){
@@ -44,17 +48,17 @@ public class UserController {
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
      }
 
-     @PutMapping("{email}")
+     @PutMapping("update/{id}")
      public ResponseEntity<?> updateUser(
-             @PathVariable("email") String email,
-             @RequestBody UserDTO userToUpdate){
-         userService.updateUser(userToUpdate);
-
-        if (userToUpdate == null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-            return new ResponseEntity<>(HttpStatus.OK);
-
+             @PathVariable("id") Long id,
+             @RequestBody UserDTO userToUpdate) throws NoSuchFieldException {
+         boolean isUserExist = userRepository.existsById(id);
+         if (isUserExist){
+             userToUpdate.setId(id);
+             userService.updateUser(userToUpdate, id);
+             return new ResponseEntity<>(userToUpdate, HttpStatus.OK);
+         }
+         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
      }
 
 }

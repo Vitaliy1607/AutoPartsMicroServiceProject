@@ -36,7 +36,5 @@ public class UserEntity {
     @Column(nullable = false)
     private String sexType;
 
-    private String role;
-
     private String password;
 }

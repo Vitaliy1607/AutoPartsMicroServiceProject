@@ -36,24 +36,18 @@ public class UserServiceImpl implements UserService {
         boolean existById = userRepository.existsById(id);
         if (existById){
             UserEntity userEntity = userRepository.findById(id).get();
-            UserDTO userDTO = modelMapper.map(userEntity, UserDTO.class);
-            return userDTO;
+            return modelMapper.map(userEntity, UserDTO.class);
         }
     return null;
     }
 
     @Override
-    public void updateUser(UserDTO userToUpdate) {
-        boolean existByEmail = userRepository.existsByEmail(userToUpdate.getEmail());
-        if (existByEmail){
-
-            userRepository.save(DTOToEntityMapper(userToUpdate));
-
-//            UserEntity userFromDB = userRepository.findById(id).get(;
-//            userFromDB.setFirstName(userToUpdate.getFirstName());              // EXAMPLE WITHOUT MODELMAPPER
-//            userFromDB.setLastName(userToUpdate.getLastName());
-//            userFromDB.setEmail(userToUpdate.getEmail());
-//            userRepository.save(userFromDB);
+    public UserEntity updateUser(UserDTO userDTO, Long id) throws NoSuchFieldException {
+        if (userRepository.findById(id).isPresent()){
+            UserEntity userEntity = modelMapper.map(userDTO, UserEntity.class);
+            return userRepository.save(userEntity);
+        }else{
+            throw new NoSuchFieldException("Not found");
         }
     }
 
