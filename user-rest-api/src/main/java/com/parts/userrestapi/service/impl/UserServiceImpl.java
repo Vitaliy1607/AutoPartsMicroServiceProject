@@ -51,8 +51,4 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
-    public UserEntity DTOToEntityMapper(UserDTO userDTO) {
-        return modelMapper.map(userDTO, UserEntity.class);
-    }
 }
