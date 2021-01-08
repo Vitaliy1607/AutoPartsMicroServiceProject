@@ -22,14 +22,14 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<?> createUser(@RequestBody UserDTO user){
         System.out.println("User " + user.getFirstName() + " " +
                 user.getLastName() + " " +
                 user.getEmail() + " was created");
 
         userService.addUser(user);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>( user ,HttpStatus.CREATED);
     }
 
     @GetMapping
