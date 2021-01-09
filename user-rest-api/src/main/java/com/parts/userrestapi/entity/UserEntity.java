@@ -37,4 +37,7 @@ public class UserEntity {
     private String sexType;
 
     private String password;
+
+    @Column(name = "is_deleted")
+    boolean isDeleted;
 }

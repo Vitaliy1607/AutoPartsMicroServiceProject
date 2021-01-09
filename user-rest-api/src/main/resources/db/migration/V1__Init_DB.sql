@@ -1,7 +1,3 @@
--- drop schema if exists userschema cascade;
---
--- create schema userschema;
-
 drop  table if exists users;
 create table users (
     id  bigserial not null,

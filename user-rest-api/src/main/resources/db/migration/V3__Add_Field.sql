@@ -1,0 +1,1 @@
+alter table userschema.users add column is_deleted BOOLEAN DEFAULT FALSE;
