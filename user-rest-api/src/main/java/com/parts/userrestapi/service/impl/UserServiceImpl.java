@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDTO> findAllUsers() {
-      return modelMapper.mapAll(userRepository.findAll(), UserDTO.class);
+      return modelMapper.mapAll(userRepository.getAllActiveUsers(), UserDTO.class);
     }
 
     @Override
