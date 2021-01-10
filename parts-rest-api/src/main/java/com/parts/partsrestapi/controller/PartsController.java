@@ -39,13 +39,18 @@ public class PartsController {
         List<PartsDTO> partsDTO = partService.findAllParts();
         List<PartsDTO> updateList = new ArrayList<>(30);
 
-        for (PartsDTO parts : partsDTO){
-            parts.setUserDTO(userFeignClient.findUserById(parts.getUserId()));
-            updateList.add(parts);
-            if (updateList.size() > 40){
-                return new ResponseEntity<>(partService.findAllParts(), HttpStatus.OK);
-            }
-        }
+//        for (PartsDTO parts : partsDTO){
+//            parts.setUserDTO(userFeignClient.findUserById(parts.getUserId()));
+//            updateList.add(parts);
+//            if (updateList.size() > 40){
+//                return new ResponseEntity<>(partService.findAllParts(), HttpStatus.OK);
+//            }
+//        }
+
+       partsDTO.stream().forEach(part -> {
+           part.setUserDTO(userFeignClient.findUserById(part.getUserId()));
+           updateList.add(part);
+       });
 
         return new ResponseEntity<>(updateList, HttpStatus.OK);
     }

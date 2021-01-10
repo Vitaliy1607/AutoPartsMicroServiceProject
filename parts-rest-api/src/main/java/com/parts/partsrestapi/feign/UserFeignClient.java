@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Headers("Content-Type: application/json")
 @FeignClient(name = "user-rest-api", url = ConstantsUtil.USER_API_URL)
@@ -29,9 +30,5 @@ public interface UserFeignClient {
 
     @GetMapping("/{userId}")
     UserDTO findUserById(@PathVariable("userId") Long id);
-
-
-
-
 
 }
