@@ -27,6 +27,9 @@ public interface UserFeignClient {
     @GetMapping("/deletedUsers")
     ResponseEntity<List<UserDTO>> getDeletedUsers();
 
+    @GetMapping("/{userId}")
+    UserDTO findUserById(@PathVariable("userId") Long id);
+
 
 
 

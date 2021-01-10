@@ -1,0 +1,1 @@
+alter table partschema.parts add column user_id bigserial;
