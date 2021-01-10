@@ -40,7 +40,7 @@ public class UserController {
         return new ResponseEntity<>(userService.findAllUsers(), HttpStatus.OK);
      }
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<UserDTO>> getActiveUsers(){
 
         return new ResponseEntity<>(userService.findActiveUsers(), HttpStatus.OK);
@@ -55,9 +55,8 @@ public class UserController {
      @GetMapping("{userId}")
      public ResponseEntity<?> getUserById(@PathVariable("userId") Long id){
         UserDTO userDTO = userService.findUserById(id);
-
         if (userDTO == null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return null;
         }
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
      }
