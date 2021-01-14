@@ -2,8 +2,7 @@ package com.parts.partsrestapi.service;
 
 
 
-import com.parts.partsrestapi.domain.PartsDTO;
-import com.parts.partsrestapi.entity.PartEntity;
+import com.dto.dtomanager.domain.PartsDTO;
 
 import java.util.List;
 

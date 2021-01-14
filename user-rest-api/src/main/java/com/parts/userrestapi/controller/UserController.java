@@ -1,7 +1,7 @@
 package com.parts.userrestapi.controller;
 
 
-import com.parts.userrestapi.domain.UserDTO;
+import com.dto.dtomanager.domain.UserDTO;
 import com.parts.userrestapi.repository.UserRepository;
 import com.parts.userrestapi.service.UserService;
 import javassist.NotFoundException;
@@ -40,12 +40,6 @@ public class UserController {
         return new ResponseEntity<>(userService.findAllUsers(), HttpStatus.OK);
      }
 
-    @GetMapping
-    public ResponseEntity<List<UserDTO>> getActiveUsers(){
-
-        return new ResponseEntity<>(userService.findActiveUsers(), HttpStatus.OK);
-    }
-
     @GetMapping("/deletedUsers")
     public ResponseEntity<List<UserDTO>> getDeletedUsers(){
 
@@ -79,5 +73,6 @@ public class UserController {
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.OK);
      }
+
 
 }

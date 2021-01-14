@@ -1,9 +1,9 @@
 package com.parts.partsrestapi.controller;
 
-import com.parts.partsrestapi.domain.UserDTO;
+
+import com.dto.dtomanager.domain.UserDTO;
 import com.parts.partsrestapi.feign.UserFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     UserFeignClient userFeignClient;
 
-    @PostMapping(name = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(name = "/save")
     public ResponseEntity<UserDTO> saveUser(@RequestBody UserDTO userDTO){
         return userFeignClient.create(userDTO);
     }

@@ -1,6 +1,6 @@
 package com.parts.userrestapi.service;
 
-import com.parts.userrestapi.domain.UserDTO;
+import com.dto.dtomanager.domain.UserDTO;
 import com.parts.userrestapi.entity.UserEntity;
 import javassist.NotFoundException;
 
@@ -12,8 +12,6 @@ public interface UserService {
     void addUser(UserDTO user);
 
     List<UserDTO> findAllUsers();
-
-    List<UserDTO> findActiveUsers();
 
     List<UserDTO> findDeletedUsers();
 

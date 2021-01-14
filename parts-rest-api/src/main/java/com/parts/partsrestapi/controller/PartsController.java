@@ -1,7 +1,6 @@
 package com.parts.partsrestapi.controller;
 
-import com.parts.partsrestapi.domain.PartsDTO;
-import com.parts.partsrestapi.domain.UserDTO;
+import com.dto.dtomanager.domain.PartsDTO;
 import com.parts.partsrestapi.feign.UserFeignClient;
 import com.parts.partsrestapi.service.PartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,6 @@ public class PartsController {
     private UserFeignClient userFeignClient;
 
     @Autowired
-    private UserController userController;
-
-    @Autowired
     private PartService partService;
 
     @PostMapping()
@@ -39,19 +35,10 @@ public class PartsController {
         List<PartsDTO> partsDTO = partService.findAllParts();
         List<PartsDTO> updateList = new ArrayList<>(30);
 
-//        for (PartsDTO parts : partsDTO){
-//            parts.setUserDTO(userFeignClient.findUserById(parts.getUserId()));
-//            updateList.add(parts);
-//            if (updateList.size() > 40){
-//                return new ResponseEntity<>(partService.findAllParts(), HttpStatus.OK);
-//            }
-//        }
-
-       partsDTO.stream().forEach(part -> {
+       partsDTO.forEach(part -> {
            part.setUserDTO(userFeignClient.findUserById(part.getUserId()));
            updateList.add(part);
        });
-
         return new ResponseEntity<>(updateList, HttpStatus.OK);
     }
 

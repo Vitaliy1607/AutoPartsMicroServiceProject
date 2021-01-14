@@ -1,7 +1,7 @@
 package com.parts.userrestapi.service.impl;
 
 
-import com.parts.userrestapi.domain.UserDTO;
+import com.dto.dtomanager.domain.UserDTO;
 import com.parts.userrestapi.entity.UserEntity;
 import com.parts.userrestapi.repository.UserRepository;
 import com.parts.userrestapi.service.UserService;
@@ -31,18 +31,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDTO> findAllUsers() {
       return modelMapper.mapAll(userRepository.getAllActiveUsers(), UserDTO.class);
-    }
-
-    @Override
-    public List<UserDTO> findActiveUsers() {
-        List<UserEntity> users = userRepository.findAll();
-        List<UserEntity> active = new ArrayList<>();
-        for (UserEntity user : users){
-            if (!user.isDeleted()){
-                active.add(user);
-            }
-        }
-        return modelMapper.mapAll(active, UserDTO.class);
     }
 
     @Override

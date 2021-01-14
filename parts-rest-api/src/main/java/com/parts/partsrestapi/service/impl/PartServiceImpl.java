@@ -1,17 +1,15 @@
 package com.parts.partsrestapi.service.impl;
 
-import com.parts.partsrestapi.domain.PartsDTO;
-import com.parts.partsrestapi.domain.UserDTO;
+import com.dto.dtomanager.domain.PartsDTO;
+import com.dto.dtomanager.domain.UserDTO;
 import com.parts.partsrestapi.entity.PartEntity;
 import com.parts.partsrestapi.feign.UserFeignClient;
 import com.parts.partsrestapi.repository.PartRepository;
 import com.parts.partsrestapi.service.PartService;
 import com.parts.partsrestapi.utils.ObjectMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
