@@ -1,4 +1,4 @@
-package com.parts.partsrestapi.domain;
+package com.dto.dtomanager.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

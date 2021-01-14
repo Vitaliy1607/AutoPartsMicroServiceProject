@@ -1,12 +1,10 @@
-package com.parts.userrestapi.domain;
+package com.dto.dtomanager.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.Column;
 
 
 @Getter
