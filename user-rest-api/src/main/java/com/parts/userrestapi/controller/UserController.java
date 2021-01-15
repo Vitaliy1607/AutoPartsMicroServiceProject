@@ -1,10 +1,13 @@
 package com.parts.userrestapi.controller;
 
 
+import com.dto.dtomanager.domain.PartsDTO;
 import com.dto.dtomanager.domain.UserDTO;
+import com.parts.userrestapi.config.MessageConfig;
 import com.parts.userrestapi.repository.UserRepository;
 import com.parts.userrestapi.service.UserService;
 import javassist.NotFoundException;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +26,16 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RabbitTemplate template;
+
+    @PostMapping("/savePart")
+    public String createPart(@RequestBody PartsDTO parts){
+        template.convertAndSend(MessageConfig.EXCHANGE, MessageConfig.ROUTING_KEY,parts);
+        System.out.println(parts.getPartName() + " : " + parts.getCondition());
+        return "Success";
+    }
 
     @PostMapping("/save")
     public ResponseEntity<?> createUser(@Valid @RequestBody UserDTO user){

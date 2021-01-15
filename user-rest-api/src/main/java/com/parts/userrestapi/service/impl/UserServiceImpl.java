@@ -35,14 +35,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDTO> findDeletedUsers() {
-        List<UserEntity> users = userRepository.findAll();
-        List<UserEntity> disabled = new ArrayList<>();
-        for (UserEntity user : users){
-            if (user.isDeleted()){
-                disabled.add(user);
-            }
-        }
-        return modelMapper.mapAll(disabled, UserDTO.class);
+        return modelMapper.mapAll(userRepository.getDeletedUsers(), UserDTO.class);
     }
 
 

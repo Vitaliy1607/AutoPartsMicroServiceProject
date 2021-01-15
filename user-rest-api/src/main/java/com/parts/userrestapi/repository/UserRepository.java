@@ -13,4 +13,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     @Query(value = "SELECT u from UserEntity u where u.isDeleted=false ")
     List<UserEntity> getAllActiveUsers();
 
+    @Query(value = "SELECT u from UserEntity u where u.isDeleted=true ")
+    List<UserEntity> getDeletedUsers();
+
 }
