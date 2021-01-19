@@ -4,6 +4,7 @@ import com.dto.dtomanager.domain.PartsDTO;
 import com.dto.dtomanager.domain.UserDTO;
 import com.parts.partsrestapi.config.MessageConfig;
 import com.parts.partsrestapi.entity.PartEntity;
+import com.parts.partsrestapi.exception.NoEntityException;
 import com.parts.partsrestapi.feign.UserFeignClient;
 import com.parts.partsrestapi.repository.PartRepository;
 import com.parts.partsrestapi.service.PartService;
@@ -49,7 +50,8 @@ public class PartServiceImpl implements PartService {
     @Override
     public PartsDTO findPartById(Long id) {
         Optional<PartEntity> optionalPartEntity = partRepository.findById(id);
-        PartEntity partEntity = optionalPartEntity.orElse(partRepository.getOne(1L));
+        PartEntity partEntity = optionalPartEntity.
+                orElseThrow(()-> new NoEntityException("Part with id [ " + id + "] not found"));
         return modelmapper.map(partEntity, PartsDTO.class);
 
     }
