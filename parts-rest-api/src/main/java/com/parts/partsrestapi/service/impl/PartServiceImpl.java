@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PartServiceImpl implements PartService {
@@ -47,13 +48,10 @@ public class PartServiceImpl implements PartService {
 
     @Override
     public PartsDTO findPartById(Long id) {
-        boolean existById = partRepository.existsById(id);
+        Optional<PartEntity> optionalPartEntity = partRepository.findById(id);
+        PartEntity partEntity = optionalPartEntity.orElse(partRepository.getOne(1L));
+        return modelmapper.map(partEntity, PartsDTO.class);
 
-        if (existById){
-            PartEntity partsEntity = partRepository.findById(id).get();
-            return modelmapper.map(partsEntity, PartsDTO.class);
-        }
-        return null;
     }
 
     @Override
